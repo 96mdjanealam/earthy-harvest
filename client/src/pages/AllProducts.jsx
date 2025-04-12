@@ -22,7 +22,11 @@ const AllProducts = () => {
     <div className="mt-16 flex flex-col">
       <p className="text-2xl font-medium uppercase">All products</p>
       <div className="w-16 h-0.5 bg-primary rounded-full"></div>
-
+      {filteredProducts.filter((product) => product.inStock).length === 0 && (
+        <p className="mt-10 text-gray-500/80">
+          No matching products found. Try a different keyword.
+        </p>
+      )}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-6 lg:grid-cols-5 mt-6">
         {filteredProducts
           .filter((product) => product.inStock)

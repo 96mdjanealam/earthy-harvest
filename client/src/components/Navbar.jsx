@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
+  const pathname = useLocation().pathname;
   const [open, setOpen] = React.useState(false);
   const {
     user,
     setUser,
     setShowUserLogin,
     navigate,
-    searchQuery,
     setSearchQuery,
   } = useAppContext();
-
-  useEffect(() => {
-    if (searchQuery.length > 0) {
-      navigate("/products");
-    }
-  }, [searchQuery]);
 
   const logout = async () => {
     setUser(null);
     navigate("/");
+  };
+
+  const handleKeyUp = (e) => {
+    if (e.key === "Enter" && pathname !== "/products") {
+      navigate("/products");
+    }
   };
 
   return (
@@ -37,16 +37,24 @@ const Navbar = () => {
         <NavLink to="/products">All Product</NavLink>
         <NavLink to="/">Contact</NavLink>
 
+        {/* Search Input */}
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyUp={handleKeyUp}
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
           />
-          <img src={assets.search_icon} alt="search" />
+          <img
+            onClick={() => navigate("/products")}
+            className="cursor-pointer"
+            src={assets.search_icon}
+            alt="search"
+          />
         </div>
 
+        {/* Cart */}
         <div
           onClick={() => {
             navigate("/cart");
@@ -63,6 +71,7 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Login/Profile */}
         {!user ? (
           <button
             onClick={() => {
@@ -74,7 +83,11 @@ const Navbar = () => {
           </button>
         ) : (
           <div className="relative group">
-            <img src={assets.profile_icon} className="w-10" alt="" />
+            <img
+              src={assets.profile_icon}
+              className="w-10"
+              alt="profile-icon"
+            />
             <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-32 rounded-md text-sm z-40">
               <li
                 onClick={() => navigate("/my-orders")}
@@ -93,12 +106,12 @@ const Navbar = () => {
         )}
       </div>
 
+      {/* Mobile Menu Toggle */}
       <button
         onClick={() => (open ? setOpen(false) : setOpen(true))}
         aria-label="Menu"
         className="sm:hidden"
       >
-        {/* Menu Icon SVG */}
         <img src={assets.menu_icon} alt="menu" />
       </button>
 
