@@ -6,23 +6,12 @@ import { useAppContext } from "../context/AppContext";
 const Navbar = () => {
   const pathname = useLocation().pathname;
   const [open, setOpen] = React.useState(false);
-  const {
-    user,
-    setUser,
-    setShowUserLogin,
-    navigate,
-    setSearchQuery,
-  } = useAppContext();
+  const { user, setUser, setShowUserLogin, navigate, setSearchQuery } =
+    useAppContext();
 
   const logout = async () => {
     setUser(null);
     navigate("/");
-  };
-
-  const handleKeyUp = (e) => {
-    if (e.key === "Enter" && pathname !== "/products") {
-      navigate("/products");
-    }
   };
 
   return (
@@ -41,7 +30,11 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyUp={handleKeyUp}
+            onKeyDown={(e) => {
+              e.key === "Enter" && pathname !== "/products"
+                ? navigate("/products")
+                : null;
+            }}
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
