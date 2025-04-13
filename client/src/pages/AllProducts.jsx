@@ -20,8 +20,10 @@ const AllProducts = () => {
 
   return (
     <div className="mt-16 flex flex-col">
-      <p className="text-2xl font-medium uppercase">All products</p>
-      <div className="w-16 h-0.5 bg-primary rounded-full"></div>
+      <div className="flex flex-col items-end w-max">
+        <p className="text-2xl font-medium uppercase">All products</p>
+        <div className="w-16 h-0.5 bg-primary rounded-full"></div>
+      </div>
       {filteredProducts.filter((product) => product.inStock).length === 0 && (
         <p className="mt-10 text-gray-500/80">
           No matching products found. Try a different keyword.
