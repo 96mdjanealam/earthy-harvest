@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 import { categories } from "../assets/assets";
@@ -7,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 const ProductCategory = () => {
   const { products } = useAppContext();
   const { category } = useParams();
+
   const searchCategory = categories.find(
     (item) => item.path.toLocaleLowerCase() === category
   );
@@ -33,7 +33,9 @@ const ProductCategory = () => {
         </div>
       ) : (
         <div className="flex items-center justify-center h-[60vh]">
-          <p className="text-2xl font-medium text-primary">No products found in this category.</p>
+          <p className="text-2xl font-medium text-primary">
+            No products found in this category.
+          </p>
         </div>
       )}
     </div>

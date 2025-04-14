@@ -23,11 +23,13 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="hidden sm:flex items-center gap-8">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/products">All Product</NavLink>
+        <NavLink to="/products" onClick={() => setSearchQuery("")}>
+          All Product
+        </NavLink>
         <NavLink to="/">Contact</NavLink>
 
         {/* Search Input */}
-        <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
+        <div className="hidden md:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => {
@@ -51,6 +53,7 @@ const Navbar = () => {
         <div
           onClick={() => {
             navigate("/cart");
+            scrollTo(0, 0);
           }}
           className="relative cursor-pointer"
         >
@@ -83,7 +86,10 @@ const Navbar = () => {
             />
             <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-32 rounded-md text-sm z-40">
               <li
-                onClick={() => navigate("/my-orders")}
+                onClick={() => {
+                  navigate("/my-orders");
+                  scrollTo(0, 0);
+                }}
                 className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
               >
                 My Orders
