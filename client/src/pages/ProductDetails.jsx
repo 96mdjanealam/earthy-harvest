@@ -33,7 +33,7 @@ const ProductDetails = () => {
 
   return (
     product && (
-      <div className="max-w-6xl w-full mt-12">
+      <div className="w-full mt-12">
         <p>
           <Link to="/">Home</Link>/ <Link to="/products">Products</Link>/{" "}
           <Link to={`/products/${product.category.toLowerCase()}`}>
@@ -142,6 +142,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+
         {/* -------- related products -------- */}
         <div className="mt-20">
           <div className="flex flex-col items-center">
