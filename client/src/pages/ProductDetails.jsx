@@ -10,7 +10,7 @@ const ProductDetails = () => {
     products,
     currency,
     addToCart,
-    removeFromCart,
+    minusFromCart,
     cartItems,
     setSearchQuery,
   } = useAppContext();
@@ -111,7 +111,7 @@ const ProductDetails = () => {
                 ) : (
                   <div className="flex w-full items-center justify-center gap-2 py-3.5 bg-primary/25 rounded select-none border border-primary box-border">
                     <button
-                      onClick={() => removeFromCart(product._id)}
+                      onClick={() => minusFromCart(product._id)}
                       className="cursor-pointer text-md px-2 h-full w-1/3 rounded bg-primary/20 ml-3"
                     >
                       -
