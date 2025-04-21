@@ -43,7 +43,7 @@ const App = () => {
             path="/seller"
             element={isSeller ? <SellerLayout /> : <SellerLogin />}
           >
-            <Route index element={isSeller ? <AddProduct /> : null} />
+            <Route index element={<AddProduct />} />
             <Route path="product-list" element={<ProductList />} />
             <Route path="orders" element={<Orders />} />
           </Route>

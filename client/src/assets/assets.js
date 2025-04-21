@@ -832,7 +832,7 @@ export const dummyOrders = [
       },
       {
         product: dummyProducts[1],
-        quantity: 1,
+        quantity: 2,
         _id: "67e258798f87e633667863f4",
       },
     ],
