@@ -43,7 +43,7 @@ const SellerLayout = () => {
       </div>
 
       {/* Body: Sidebar + Content */}
-      <div className="flex overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <div className="md:w-64 w-16 border-r text-base border-gray-300 pt-4 flex flex-col overflow-y-auto">
           {sidebarLinks.map((item) => (
