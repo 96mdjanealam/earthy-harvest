@@ -16,3 +16,6 @@ productRouter.get("/id", productById);
 productRouter.get("/stock", authSeller, changeStock);
 
 export default productRouter;
+
+
+// productRouter.post("/add", upload.array(["images"]), authSeller, addProduct);
