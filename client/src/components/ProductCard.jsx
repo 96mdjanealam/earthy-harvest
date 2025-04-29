@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
 
   return (
     product && (
-      <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full">
+      <div className="border border-gray-500/20 rounded-md px-3 py-3 bg-white w-full">
         <div
           onClick={() => {
             navigate(
