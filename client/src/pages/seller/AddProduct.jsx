@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { assets, categories } from "../../assets/assets";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const [files, setFiles] = useState([]);
@@ -8,9 +10,40 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
+  const { axios } = useAppContext();
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      const productData = {
+        name,
+        description: description.split("\n"),
+        category,
+        price,
+        offerPrice,
+      };
+
+      const formData = new FormData();
+      formData.append("productData", JSON.stringify(productData));
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+
+      const { data } = await axios.post("/api/product/add", formData);
+      if (data.success) {
+        toast.success(data.message);
+        setName("");
+        setDescription("");
+        setCategory("");
+        setOfferPrice("");
+        setPrice("");
+        setFiles([]);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -74,8 +107,8 @@ const AddProduct = () => {
             Product Description
           </label>
           <textarea
-           onChange={(e) => setDescription(e.target.value)}
-           value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
             id="product-description"
             rows={4}
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40 resize-none"
@@ -87,14 +120,16 @@ const AddProduct = () => {
             Category
           </label>
           <select
-           onChange={(e) => setCategory(e.target.value)}
-           value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
             id="category"
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
-            {categories.map((item,index)=>(
-              <option key={index} value={item.path} >{item.path}</option>
+            {categories.map((item, index) => (
+              <option key={index} value={item.path}>
+                {item.path}
+              </option>
             ))}
           </select>
         </div>
@@ -104,8 +139,8 @@ const AddProduct = () => {
               Product Price
             </label>
             <input
-             onChange={(e) => setPrice(e.target.value)}
-             value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
               id="product-price"
               type="number"
               placeholder="0"
@@ -118,8 +153,8 @@ const AddProduct = () => {
               Offer Price
             </label>
             <input
-             onChange={(e) => setOfferPrice(e.target.value)}
-             value={offerPrice}
+              onChange={(e) => setOfferPrice(e.target.value)}
+              value={offerPrice}
               id="offer-price"
               type="number"
               placeholder="0"
