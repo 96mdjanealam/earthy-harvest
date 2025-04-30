@@ -34,6 +34,19 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  // Fetch User Status
+  const fetchUser = async () => {
+    try {
+      const { data } = await axios.get("/api/user/is-auth");
+      if (data.success) {
+        setUser(data.user);
+        setCartItems(data.user.cart);
+      }
+    } catch (error) {
+      setUser(null);
+    }
+  };
+
   // fetch all product
   const fetchProducts = async () => {
     try {
@@ -108,9 +121,27 @@ export const AppContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    fetchUser();
     fetchSeller();
     fetchProducts();
   }, []);
+
+  // Update Database Cart Items
+  useEffect(() => {
+    const updateCart = async () => {
+      try {
+        const { data } = await axios.post("/api/cart/update", { cartItems });
+        if (!data.success) {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    if(user){
+      updateCart()
+    }
+  }, [cartItems, user]);
 
   const value = {
     navigate,
@@ -132,6 +163,7 @@ export const AppContextProvider = ({ children }) => {
     getCartAmount,
     getCartCount,
     axios,
+    fetchProducts,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

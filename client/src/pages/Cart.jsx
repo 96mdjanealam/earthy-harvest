@@ -37,7 +37,7 @@ const Cart = () => {
     }
   }, [products, cartItems]);
 
-  return products.length > 0 && cartItems ? (
+  return (
     <div className="flex flex-col md:flex-row mt-16">
       <div className="flex-1 max-w-4xl">
         <h1 className="text-3xl font-medium mb-6">
@@ -107,37 +107,36 @@ const Cart = () => {
             </p>
             <div className="flex mx-auto gap-2">
               <button
-              onClick={() => addToCart(product._id)}
-              className="cursor-pointer"
-            >
-              <img
-                src={assets.addTo_icon}
-                alt="remove"
-                className="inline-block w-6 h-6 object-contain"
-              />
-            </button>
+                onClick={() => addToCart(product._id)}
+                className="cursor-pointer"
+              >
+                <img
+                  src={assets.addTo_icon}
+                  alt="remove"
+                  className="inline-block w-6 h-6 object-contain"
+                />
+              </button>
               <button
-              onClick={() => minusFromCart(product._id)}
-              className="cursor-pointer"
-            >
-              <img
-                src={assets.minus_icon}
-                alt="remove"
-                className="inline-block w-6 h-6 object-contain"
-              />
-            </button>
-            <button
-              onClick={() => deleteFromCart(product._id)}
-              className="cursor-pointer"
-            >
-              <img
-                src={assets.remove_icon}
-                alt="remove"
-                className="inline-block w-6 h-6"
-              />
-            </button>
+                onClick={() => minusFromCart(product._id)}
+                className="cursor-pointer"
+              >
+                <img
+                  src={assets.minus_icon}
+                  alt="remove"
+                  className="inline-block w-6 h-6 object-contain"
+                />
+              </button>
+              <button
+                onClick={() => deleteFromCart(product._id)}
+                className="cursor-pointer"
+              >
+                <img
+                  src={assets.remove_icon}
+                  alt="remove"
+                  className="inline-block w-6 h-6"
+                />
+              </button>
             </div>
-            
           </div>
         ))}
 
@@ -248,7 +247,7 @@ const Cart = () => {
         </button>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Cart;

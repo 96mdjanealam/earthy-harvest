@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const pathname = useLocation().pathname;
@@ -13,11 +14,22 @@ const Navbar = () => {
     navigate,
     setSearchQuery,
     getCartCount,
+    axios,
   } = useAppContext();
 
   const logout = async () => {
-    setUser(null);
-    navigate("/");
+    try {
+      const { data } = await axios.get("api/user/logout");
+      if (data.success) {
+        toast.success(data.message);
+        setUser(null);
+        navigate("/");
+      }else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
