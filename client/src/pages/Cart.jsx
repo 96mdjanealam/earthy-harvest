@@ -69,7 +69,7 @@ const Cart = () => {
                 className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded"
               >
                 <img
-                  className="max-w-full h-full object-cover"
+                  className="max-w-full h-full object-contain"
                   src={product.image[0]}
                   alt={product.name}
                 />
