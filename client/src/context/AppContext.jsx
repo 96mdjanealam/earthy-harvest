@@ -63,7 +63,9 @@ export const AppContextProvider = ({ children }) => {
   const syncCartWithDB = async (newCartItems) => {
     if (!user) return;
     try {
-      const { data } = await axios.post("/api/cart/update", { cartItems: newCartItems });
+      const { data } = await axios.post("/api/cart/update", {
+        cartItems: newCartItems,
+      });
       if (!data.success) {
         toast.error(data.message);
       }
@@ -74,6 +76,10 @@ export const AppContextProvider = ({ children }) => {
 
   // Add to Cart
   const addToCart = (itemId) => {
+    if (!user) {
+      toast.error("Please login to add to cart");
+      return;
+    }
     const cartData = structuredClone(cartItems);
     cartData[itemId] = (cartData[itemId] || 0) + 1;
     setCartItems(cartData);
