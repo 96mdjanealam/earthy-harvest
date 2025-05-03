@@ -168,6 +168,7 @@ export const AppContextProvider = ({ children }) => {
     fetchProducts,
     fetchUser,
     setCartItems,
+    syncCartWithDB,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
