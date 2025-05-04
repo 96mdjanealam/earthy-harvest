@@ -10,7 +10,7 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
-  const { axios } = useAppContext();
+  const { axios, fetchProducts } = useAppContext();
 
   const onSubmitHandler = async (event) => {
     try {
@@ -38,6 +38,7 @@ const AddProduct = () => {
         setOfferPrice("");
         setPrice("");
         setFiles([]);
+        fetchProducts();
       } else {
         toast.error(data.message);
       }
