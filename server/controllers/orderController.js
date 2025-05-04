@@ -110,22 +110,21 @@ export const placeOrderStripe = async (req, res) => {
   }
 };
 
-
 // --------------------------------------------------------------------------------------
 // Stripe webhooks to verify payments action: /stripe
-export const stripeWebhooks = async (req, res) => {
+export const stripeWebhooks = async (request, response) => {
   // Stripe gateway initialize
   const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
-  const sig = req.headers["stripe-signature"];
+  const sig = request.headers["stripe-signature"];
   let event;
   try {
     event = stripeInstance.webhooks.constructEvent(
-      req.body,
+      request.body,
       sig,
-      process.env.STRIPE_WEBHOOK_KEY
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (error) {
-    res.status(400).send(`Webhook Error: ${error.message}`);
+    response.status(400).send(`Webhook Error: ${error.message}`);
   }
   //Handle the event
   switch (event.type) {
