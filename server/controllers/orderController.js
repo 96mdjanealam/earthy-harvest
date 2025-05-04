@@ -2,7 +2,6 @@ import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import stripe from "stripe";
 import User from "../models/User.js";
-import { response } from "express";
 
 // Place Order COD: /api/order/cod
 export const placeOrderCOD = async (req, res) => {
@@ -111,20 +110,22 @@ export const placeOrderStripe = async (req, res) => {
   }
 };
 
+
+// --------------------------------------------------------------------------------------
 // Stripe webhooks to verify payments action: /stripe
-export const stripeWebhooks = async () => {
+export const stripeWebhooks = async (req, res) => {
   // Stripe gateway initialize
   const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
-  const sig = request.headers["stripe-signature"];
+  const sig = req.headers["stripe-signature"];
   let event;
   try {
     event = stripeInstance.webhooks.constructEvent(
-      request.body,
+      req.body,
       sig,
       process.env.STRIPE_WEBHOOK_KEY
     );
   } catch (error) {
-    response.status(400).send(`Webhook Error: ${error.message}`);
+    res.status(400).send(`Webhook Error: ${error.message}`);
   }
   //Handle the event
   switch (event.type) {
@@ -159,8 +160,9 @@ export const stripeWebhooks = async () => {
       console.error(`Unhandled event type ${event.type}`);
       break;
   }
-  response.json({ received: true });
+  res.json({ received: true });
 };
+// --------------------------------------------------------------------------------------
 
 // Get orders by userId : /api/order/user
 export const getUserOrders = async (req, res) => {
