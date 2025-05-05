@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+import { assets } from "../../assets/assets";
 
 const ProductList = () => {
   const { products, currency, axios, fetchProducts } = useAppContext();
@@ -8,6 +9,20 @@ const ProductList = () => {
   const toggleStock = async (id, inStock) => {
     try {
       const { data } = await axios.post("/api/product/stock", { id, inStock });
+      if (data.success) {
+        fetchProducts();
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      const { data } = await axios.post("/api/product/delete", { id });
       if (data.success) {
         fetchProducts();
         toast.success(data.message);
@@ -32,6 +47,7 @@ const ProductList = () => {
                 <th className="px-4 py-3 font-semibold truncate hidden md:block">
                   Selling Price
                 </th>
+                <th className="px-4 py-3 font-semibold truncate">Action</th>
                 <th className="px-4 py-3 font-semibold truncate">In Stock</th>
               </tr>
             </thead>
@@ -56,7 +72,15 @@ const ProductList = () => {
                     {product.offerPrice}
                   </td>
                   <td className="px-4 py-3">
-                    <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
+                    <img
+                      onClick={() => deleteProduct(product._id)}
+                      className="w-7 h-7 object-contain cursor-pointer"
+                      src={assets.remove_icon}
+                      alt=""
+                    />
+                  </td>
+                  <td className="px-4 py-3">
+                    <label className="relative inline-flex mt-1 items-center cursor-pointer text-gray-900 gap-3">
                       <input
                         type="checkbox"
                         className="sr-only peer"
@@ -66,7 +90,7 @@ const ProductList = () => {
                         }
                       />
                       <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
-                        <span className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
+                      <span className="absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                     </label>
                   </td>
                 </tr>
