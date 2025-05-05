@@ -22,6 +22,18 @@ export const addProduct = async (req, res) => {
   }
 };
 
+// Delete Product: /api/product/delete
+export const deleteProduct = async (req, res) => {
+  try {
+    let productId = req.body.id;
+    await Product.findByIdAndDelete(productId);
+    res.json({ success: true, message: "Product Deleted" });
+  } catch (error) {
+    res.json({success:false, message: error.message});
+  }
+}
+
+
 // Get Product: /api/product/list
 export const productList = async (req, res) => {
   try {

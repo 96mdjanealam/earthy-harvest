@@ -4,6 +4,7 @@ import authSeller from "../middlewares/authSeller.js";
 import {
   addProduct,
   changeStock,
+  deleteProduct,
   productById,
   productList,
 } from "../controllers/productController.js";
@@ -11,6 +12,7 @@ import {
 const productRouter = express.Router();
 
 productRouter.post("/add", upload.array("images"), authSeller, addProduct);
+productRouter.post("/delete", authSeller, deleteProduct);
 productRouter.get("/list", productList);
 productRouter.get("/id", productById);
 productRouter.post("/stock", authSeller, changeStock);
