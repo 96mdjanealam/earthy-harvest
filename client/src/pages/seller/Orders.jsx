@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
-import { assets, dummyOrders } from "../../assets/assets";
+import { assets } from "../../assets/assets";
 import toast from "react-hot-toast";
 
 const Orders = () => {
-  const boxIcon =
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
   const { currency, axios } = useAppContext();
   const [orders, setOrders] = useState([]);
 
@@ -44,7 +42,7 @@ const Orders = () => {
               <div className="flex flex-col">
                 {order.items.map((item, index) => (
                   <p key={index} className="font-medium">
-                    {item.product.name}{" "}
+                    {item.product?.name}{" "}
                     <span className="text-indigo-500">x {item.quantity}</span>
                   </p>
                 ))}
