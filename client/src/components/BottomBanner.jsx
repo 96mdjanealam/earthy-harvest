@@ -1,5 +1,16 @@
 import React from "react";
 import { assets, features } from "../assets/assets";
+import { FaHeart } from "react-icons/fa";
+import { ImPriceTags } from "react-icons/im";
+import { SiCodefresh } from "react-icons/si";
+import { MdOutlineElectricBike } from "react-icons/md";
+
+const icons = [
+  <MdOutlineElectricBike />,
+  <SiCodefresh />,
+  <ImPriceTags />,
+  <FaHeart />,
+];
 
 const BottomBanner = () => {
   return (
@@ -7,12 +18,12 @@ const BottomBanner = () => {
       <img
         src={assets.bottom_banner_image}
         alt="banner"
-        className="w-full hidden md:block"
+        className="w-full hidden md:block rounded-xl"
       />
       <img
         src={assets.bottom_banner_image_sm}
         alt="banner"
-        className="w-full  md:hidden"
+        className="w-full  md:hidden rounded-xl"
       />
       <div className="absolute inset-0 flex flex-col items-center md:items-end md:justify-center pt-16 md:pt-0 md:pr-24">
         <div className="flex flex-col">
@@ -22,16 +33,14 @@ const BottomBanner = () => {
           <div className="flex flex-col">
             {features.map((feature, index) => (
               <div key={index} className="flex items-center gap-4 mt-2">
-                <img
-                  src={feature.icon}
-                  alt={feature.title}
-                  className="md:w-11 w-9"
-                />
+                <div className="bg-primary p-2.5 rounded-lg text-white text-lg">
+                {icons[index]}
+                </div>
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-500/70 text-xs md:text-sm">
+                  <p className="text-black/50 text-xs md:text-sm">
                     {feature.description}
                   </p>
                 </div>

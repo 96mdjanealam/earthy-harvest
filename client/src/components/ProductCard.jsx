@@ -1,13 +1,15 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { FaCartShopping } from "react-icons/fa6";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
   const {
     currency,
     addToCart,
     minusFromCart,
-    cartItems ={},
+    cartItems = {},
     navigate,
   } = useAppContext();
 
@@ -35,18 +37,11 @@ const ProductCard = ({ product }) => {
         <p className="text-gray-700 font-medium text-lg truncate w-full">
           {product.name}
         </p>
-        <div className="flex items-center gap-0.5">
-          {Array(5)
-            .fill("")
-            .map((_, i) => (
-              <img
-                key={i}
-                className="md:w-3.5 w-3"
-                src={i < 4 ? assets.star_icon : assets.star_dull_icon}
-                alt="star"
-              />
-            ))}
-          <p>(4)</p>
+        <div className="flex items-center gap-1 text-primary">
+          {Array.from({ length: 5 }, (_, i) =>
+            i < 4 ? <FaStar key={i} /> : <FaRegStar key={i}/>
+          )}
+          <p className="text-sm text-gray-600">(4)</p>
         </div>
         <div className="flex items-end justify-between mt-3">
           <p className="md:text-xl text-base font-medium text-primary">
@@ -60,10 +55,10 @@ const ProductCard = ({ product }) => {
           <div className="text-primary">
             {!cartItems[product._id] ? (
               <button
-                className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 md:w-[80px] w-[64px] h-[34px] rounded"
+                className="flex items-center justify-center gap-1 cursor-pointer bg-primary/10 border border-primary/40 md:w-[80px] w-[64px] h-[34px] rounded"
                 onClick={() => addToCart(product._id)}
               >
-                <img src={assets.cart_icon} alt="cart_icon" />
+                <FaCartShopping />
                 Add
               </button>
             ) : (

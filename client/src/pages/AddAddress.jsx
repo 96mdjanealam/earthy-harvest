@@ -66,7 +66,7 @@ const AddAddress = () => {
         Add Shipping <span className="font-semibold text-primary">Address</span>
       </p>
       <div className="flex flex-col-reverse md:flex-row justify-between mt-10">
-        <div className="flex-1 max-w-md">
+        <div className="flex-1">
           <form onSubmit={onSubmitHandler} className="space-y-3 mt-6 text-sm">
             <div className="grid grid-cols-2 gap-4">
               <InputField
@@ -142,9 +142,9 @@ const AddAddress = () => {
             </button>
           </form>
         </div>
-        <div>
+        <div className="flex-1 flex justify-center items-center md:pl-16 md:justify-end">
           <img
-            className="md:mr-16 mb-16 md:mt-0"
+            className=""
             src={assets.add_address_iamge}
             alt="Add Address"
           />

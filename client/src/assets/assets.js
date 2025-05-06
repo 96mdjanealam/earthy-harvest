@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import earthy_harvest_logo from "./earthy_harvest_logo.png"
 import search_icon from "./search_icon.svg";
 import remove_icon from "./remove_icon.svg";
 import arrow_right_icon_colored from "./arrow_right_icon_colored.svg";
@@ -74,6 +75,7 @@ import minus_icon from "./icons8-minus-48.png"
 
 export const assets = {
   logo,
+  earthy_harvest_logo,
   addTo_icon,
   minus_icon,
   search_icon,

@@ -26,7 +26,7 @@ const Navbar = () => {
         setUser(null);
         setCartItems({});
         navigate("/");
-      }else{
+      } else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -36,14 +36,30 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
-      <NavLink to="/" onClick={() => setOpen(false)}>
-        <img className="h-9" src={assets.logo} alt="logo" />
+      <NavLink
+        to="/"
+        className="flex items-center gap-4"
+        onClick={() => setOpen(false)}
+      >
+        <img className="h-10" src={assets.earthy_harvest_logo} alt="logo" />{" "}
+        <p className="font-bold text-2xl md:text-3xl text-[#89AC46]">
+          Earthy <span className="text-primary">Harvest</span>
+        </p>
       </NavLink>
 
       {/* Desktop Menu */}
       <div className="hidden sm:flex items-center gap-8">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/products" onClick={() => setSearchQuery("")}>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "text-primary" : "")}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/products"
+          onClick={() => setSearchQuery("")}
+          className={({ isActive }) => (isActive ? "text-primary" : "")}
+        >
           All Product
         </NavLink>
         <NavLink to="/">Contact</NavLink>
