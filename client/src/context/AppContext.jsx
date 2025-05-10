@@ -77,6 +77,7 @@ export const AppContextProvider = ({ children }) => {
   const addToCart = (itemId) => {
     if (!user) {
       toast.error("Please login to add to cart");
+      setShowUserLogin(true)
       return;
     }
     const cartData = structuredClone(cartItems);
