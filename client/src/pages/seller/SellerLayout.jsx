@@ -1,11 +1,10 @@
-import React from "react";
 import { useAppContext } from "../../context/AppContext";
 import { assets } from "../../assets/assets";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const SellerLayout = () => {
-  const { axios, navigate } = useAppContext();
+  const { axios, navigate, setIsSeller } = useAppContext();
 
   const sidebarLinks = [
     { name: "Add Product", path: "/seller", icon: assets.add_icon },
@@ -21,6 +20,7 @@ const SellerLayout = () => {
     try {
       const { data } = await axios.get("/api/seller/logout");
       if (data.success) {
+        setIsSeller(false);
         toast.success(data.message);
         navigate("/");
       } else {
@@ -35,13 +35,12 @@ const SellerLayout = () => {
     <div className="flex flex-col h-dvh">
       {/* Top Navbar */}
       <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 shrink-0">
-        <Link to="/">
-          <img
-            src={assets.logo}
-            alt="logo"
-            className="cursor-pointer w-32 md:w-36"
-          />
-        </Link>
+        <NavLink to="/" className="flex items-center gap-4">
+          <img className="h-10" src={assets.earthy_harvest_logo} alt="logo" />
+          <p className="font-bold text-2xl md:text-3xl text-[#89AC46]">
+            Earthy <span className="text-primary">Harvest</span>
+          </p>
+        </NavLink>
         <div className="flex items-center gap-5 text-gray-500">
           <p>Hi! Admin</p>
           <button

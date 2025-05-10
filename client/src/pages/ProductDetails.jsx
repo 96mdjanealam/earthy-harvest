@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { Link, useParams } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import ProductCard from "../components/ProductCard";
+import { FaCartShopping } from "react-icons/fa6";
 
 const ProductDetails = () => {
   const {
@@ -57,27 +58,22 @@ const ProductDetails = () => {
             </div>
 
             <div className="border border-gray-500/30 md:w-96 md:h-96 h-64 w-full flex items-center justify-center rounded">
-              <img src={thumbnail} className="w-full h-full object-contain" alt="Selected product" />
+              <img
+                src={thumbnail}
+                className="w-full h-full object-contain"
+                alt="Selected product"
+              />
             </div>
           </div>
-
           <div className="text-sm w-full md:w-1/2">
             <h1 className="text-3xl font-medium">{product.name}</h1>
 
-            <div className="flex items-center gap-0.5 mt-1">
-              {Array(5)
-                .fill("")
-                .map((_, i) => (
-                  <img
-                    src={i < 4 ? assets.star_icon : assets.star_dull_icon}
-                    alt=""
-                    key={i}
-                    className="md:w-4 w-3.5"
-                  />
-                ))}
-              <p className="text-base ml-2">(4)</p>
+            <div className="flex items-center gap-1 text-primary mt-2">
+              {Array.from({ length: 5 }, (_, i) =>
+                i < 4 ? <FaStar key={i} /> : <FaRegStar key={i} />
+              )}
+              <p className="text-sm text-gray-600">(4)</p>
             </div>
-
             <div className="mt-6">
               <p className="text-gray-500/70 line-through">
                 MRP: {currency}
@@ -105,7 +101,7 @@ const ProductDetails = () => {
                     className="py-3.5 w-full cursor-pointer flex items-center justify-center gap-1  bg-primary/10 rounded border border-primary box-border"
                     onClick={() => addToCart(product._id)}
                   >
-                    <img src={assets.cart_icon} alt="cart_icon" />
+                    <FaCartShopping className="mr-1" />
                     Add
                   </button>
                 ) : (

@@ -63,6 +63,15 @@ const SellerLogin = () => {
               required
             />
           </div>
+          <p
+            className="underline hover:text-primary cursor-pointer"
+            onClick={() => {
+              setEmail("admin@123.com");
+              setPassword("admin123");
+            }}
+          >
+            Input seller credentials
+          </p>
           <button className="bg-primary text-white w-full py-2 rounded-md">
             Login
           </button>

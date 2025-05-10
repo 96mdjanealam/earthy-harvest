@@ -20,19 +20,19 @@ const ProductList = () => {
     }
   };
 
-  const deleteProduct = async (id) => {
-    try {
-      const { data } = await axios.post("/api/product/delete", { id });
-      if (data.success) {
-        fetchProducts();
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  // const deleteProduct = async (id) => {
+  //   try {
+  //     const { data } = await axios.post("/api/product/delete", { id });
+  //     if (data.success) {
+  //       fetchProducts();
+  //       toast.success(data.message);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
 
   return (
     <div className="no-scrollbar flex-1 overflow-y-scroll flex flex-col justify-between">
@@ -47,7 +47,7 @@ const ProductList = () => {
                 <th className="px-4 py-3 font-semibold truncate hidden md:block">
                   Selling Price
                 </th>
-                <th className="px-4 py-3 font-semibold truncate">Action</th>
+                {/* <th className="px-4 py-3 font-semibold truncate">Action</th> */}
                 <th className="px-4 py-3 font-semibold truncate">In Stock</th>
               </tr>
             </thead>
@@ -71,14 +71,14 @@ const ProductList = () => {
                     {currency}
                     {product.offerPrice}
                   </td>
-                  <td className="px-4 py-3">
+                  {/* <td className="px-4 py-3">
                     <img
                       onClick={() => deleteProduct(product._id)}
                       className="w-7 h-7 object-contain cursor-pointer"
                       src={assets.remove_icon}
                       alt=""
                     />
-                  </td>
+                  </td> */}
                   <td className="px-4 py-3">
                     <label className="relative inline-flex mt-1 items-center cursor-pointer text-gray-900 gap-3">
                       <input

@@ -3,7 +3,8 @@ import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { setShowUserLogin, setUser, axios, navigate,fetchUser } = useAppContext();
+  const { setShowUserLogin, axios, navigate, fetchUser } =
+    useAppContext();
 
   const [state, setState] = React.useState("login");
   const [name, setName] = React.useState("");
@@ -90,15 +91,26 @@ const Login = () => {
             </span>
           </p>
         ) : (
-          <p>
-            Create an account?{" "}
-            <span
-              onClick={() => setState("register")}
-              className="text-primary cursor-pointer"
+          <div className="space-y-1">
+            <p
+              className="underline hover:text-primary cursor-pointer"
+              onClick={() => {
+                setEmail("user@gmail.com");
+                setPassword("123456");
+              }}
             >
-              click here
-            </span>
-          </p>
+              Input user credentials
+            </p>
+            <p>
+              Create an account?{" "}
+              <span
+                onClick={() => setState("register")}
+                className="text-primary cursor-pointer"
+              >
+                click here
+              </span>
+            </p>
+          </div>
         )}
         <button className="bg-primary hover:bg-primary-dull transition-all text-white w-full py-2 rounded-md cursor-pointer">
           {state === "register" ? "Create Account" : "Login"}

@@ -63,6 +63,7 @@ const Navbar = () => {
           All Product
         </NavLink>
         <NavLink to="/">Contact</NavLink>
+        <NavLink className="text-sm underline" to="/seller">Admin</NavLink>
 
         {/* Search Input */}
         <div className="hidden md:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
@@ -181,7 +182,7 @@ const Navbar = () => {
           All Product
         </NavLink>
         {user && (
-          <NavLink to="/" onClick={() => setOpen(false)}>
+          <NavLink to="/my-orders" onClick={() => setOpen(false)}>
             My Orders
           </NavLink>
         )}
