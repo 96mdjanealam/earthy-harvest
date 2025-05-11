@@ -41,8 +41,8 @@ const Navbar = () => {
         className="flex items-center gap-4"
         onClick={() => setOpen(false)}
       >
-        <img className="h-10" src={assets.earthy_harvest_logo} alt="logo" />{" "}
-        <p className="font-bold text-2xl md:text-3xl text-[#89AC46]">
+        <img className="h-6 md:h-10" src={assets.earthy_harvest_logo} alt="logo" />{" "}
+        <p className="font-bold text-xl sm:text-2xl md:text-3xl text-[#89AC46]">
           Earthy <span className="text-primary">Harvest</span>
         </p>
       </NavLink>
@@ -118,11 +118,15 @@ const Navbar = () => {
           </button>
         ) : (
           <div className="relative group">
-            <img
-              src={assets.profile_icon}
-              className="w-10"
-              alt="profile-icon"
-            />
+            <div className="flex items-center gap-2">
+              <p className="hidden text-sm font-bold text-primary md:block">{user.name}</p>
+              <img
+                src={assets.profile_icon}
+                className="w-10"
+                alt="profile-icon"
+              />
+            </div>
+
             <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-32 rounded-md text-sm z-40">
               <li
                 onClick={() => {
@@ -206,12 +210,15 @@ const Navbar = () => {
             Login
           </button>
         ) : (
-          <button
-            onClick={logout}
-            className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm"
-          >
-            Logout
-          </button>
+          <div className="flex items-center mt-2 gap-4">
+            <button
+              onClick={logout}
+              className="cursor-pointer px-6 py-2  bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm"
+            >
+              Logout
+            </button>
+            <p className="text-sm text-primary font-bold">{user.name}</p>
+          </div>
         )}
       </div>
     </nav>
